@@ -1,14 +1,14 @@
-import { icons } from "@/constants/icons";
-import { images } from "@/constants/images";
-import { Tabs } from "expo-router";
-import React from "react";
+import { icons } from '@/constants/icons';
+import { images } from '@/constants/images';
+import { Tabs } from 'expo-router';
+import React from 'react';
 import {
 	Image,
 	ImageBackground,
 	type ImageSourcePropType,
 	Text,
 	View,
-} from "react-native";
+} from 'react-native';
 
 type TabIconProps = {
 	focused: boolean;
@@ -44,28 +44,28 @@ const _Layout = () => {
 			screenOptions={{
 				tabBarShowLabel: false,
 				tabBarItemStyle: {
-					width: "100%",
-					height: "100%",
-					justifyContent: "center",
-					alignItems: "center",
+					width: '100%',
+					height: '100%',
+					justifyContent: 'center',
+					alignItems: 'center',
 				},
 				tabBarStyle: {
-					backgroundColor: "#0F0D23",
+					backgroundColor: '#0F0D23',
 					borderRadius: 50,
 					marginHorizontal: 20,
 					marginBottom: 36,
 					height: 52,
-					position: "absolute",
-					overflow: "hidden",
+					position: 'absolute',
+					overflow: 'hidden',
 					borderWidth: 1,
-					borderColor: "#0F0D23",
+					borderColor: '#0F0D23',
 				},
 			}}
 		>
 			<Tabs.Screen
 				name="index"
 				options={{
-					title: "Home",
+					title: 'Home',
 					headerShown: false,
 					tabBarIcon: ({ focused }) => (
 						<TabIcon focused={focused} icon={icons.home} title="Home" />
@@ -75,7 +75,7 @@ const _Layout = () => {
 			<Tabs.Screen
 				name="search"
 				options={{
-					title: "Search",
+					title: 'Search',
 					headerShown: false,
 					tabBarIcon: ({ focused }) => (
 						<TabIcon focused={focused} icon={icons.search} title="Search" />
@@ -85,7 +85,7 @@ const _Layout = () => {
 			<Tabs.Screen
 				name="saved"
 				options={{
-					title: "Saved",
+					title: 'Saved',
 					headerShown: false,
 					tabBarIcon: ({ focused }) => (
 						<TabIcon focused={focused} icon={icons.save} title="Saved" />
@@ -95,7 +95,7 @@ const _Layout = () => {
 			<Tabs.Screen
 				name="profile"
 				options={{
-					title: "Profile",
+					title: 'Profile',
 					headerShown: false,
 					tabBarIcon: ({ focused }) => (
 						<TabIcon focused={focused} icon={icons.person} title="Profile" />
