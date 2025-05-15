@@ -1,50 +1,118 @@
-# Welcome to your Expo app 👋
+# 🎬 MovieFlix
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+MovieFlix is a **React Native** mobile application built with **Expo**, **TypeScript**, **NativeWind**, and **Appwrite**. It fetches rich movie data from the [TMDB (The Movie Database)](https://www.themoviedb.org/) API, including:
 
-## Get started
+- ⭐ Average rating
+- 📝 Description
+- 💰 Revenue and budget
+- 🏢 Production companies
 
-1. Install dependencies
+> ⚠️ This app was created as part of my learning journey with **React Native** and **Expo**.
 
-   ```bash
-   npm install
-   ```
+---
 
-2. Start the app
+## 📱 Screenshots
 
-   ```bash
-   npx expo start
-   ```
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/81e08823-c38d-4a64-b82b-729e2c88bf03" width="30%" />
+  <img src="https://github.com/user-attachments/assets/726692e4-893d-4483-9a2c-676ee0db25b5" width="30%" />
+  <br />
+  <img src="https://github.com/user-attachments/assets/3ff8c9f2-e058-4b48-812a-bc30953404e5" width="30%" />
+  <img src="https://github.com/user-attachments/assets/c9ac7259-4115-4fb5-8013-09118f2c8a9f" width="30%" />
+</p>
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 🧰 Technologies Used
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- [React Native](https://reactnative.dev/)
+- [Expo](https://expo.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [NativeWind](https://www.nativewind.dev/)
+- [Appwrite](https://appwrite.io/)
+- [TMDB API](https://www.themoviedb.org/documentation/api)
 
-## Get a fresh project
+---
 
-When you're ready, run:
+## 🚀 Features
+
+- 🔍 Search for movies
+- 🎞 View detailed movie information
+- 🗳 See ratings, description, revenue, budget, and production companies
+- 🧑‍💻 Clean and responsive UI using NativeWind
+- ☁️ Backend powered by Appwrite
+
+---
+
+## ⚙️ Setup & Running Locally
+
+Follow these steps to run the project on your local machine:
+
+### 1. Clone the repository
 
 ```bash
-npm run reset-project
+git clone https://github.com/your-username/movieflix.git
+cd movieflix
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 2. Install dependencies
+Make sure you have Node.js, Yarn or npm, and Expo CLI installed:
 
-## Learn more
+```bash
+npm install -g expo-cli
+yarn install # or npm install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+### 3. Set up environment variables
+Create a .env file in the root directory with the following variables:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```.env
+TMDB_API_KEY=your_tmdb_api_key
+APPWRITE_ENDPOINT=https://your-appwrite-instance.com/v1
+APPWRITE_PROJECT_ID=your_appwrite_project_id
+APPWRITE_DATABASE_ID=your_database_id
+APPWRITE_COLLECTION_ID=your_collection_id
+```
 
-## Join the community
+📝 You can get your TMDB API key from [here](https://www.themoviedb.org/settings/api)
+🗃 Appwrite setup guide: https://appwrite.io/docs
 
-Join our community of developers creating universal apps.
+### 4. Start the project
+```bash
+npx expo start
+```
+Scan the QR code using the Expo Go app on your mobile device.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+---
+
+## 📂 Folder Structure
+```bash
+movieflix/
+│
+├── app/
+│   ├── (tabs)/       # App tabs (Home, Search, etc.)
+│   ├── movies/       # Screen to show movies info
+├── types/            # TypeScript types
+├── services/         # API and Appwrite services
+├── components/       # Reusable components
+├── .env              # Environment variables
+└── ...
+```
+
+---
+
+## 📌 Roadmap
+- [x] Movie search
+- [x] Detailed movie info
+- [ ] User favorites (coming soon!)
+- [ ] Authentication with Appwrite (coming soon!)
+
+---
+
+## 🤝 Contributing
+Feel free to open issues or submit pull requests. Contributions are always welcome! 🎉
+
+---
+
+## 🙋‍♂️ GabrielOliveira23
+Created with ❤️ while learning React Native & Expo
