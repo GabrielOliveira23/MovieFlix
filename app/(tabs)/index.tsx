@@ -3,8 +3,8 @@ import SearchBar from '@/components/SearchBar';
 import TrendingCard from '@/components/TrendingCard';
 import { icons } from '@/constants/icons';
 import { images } from '@/constants/images';
-import { fetchMovies } from '@/services/api';
 import { getTrendingMovies } from '@/services/appwrite';
+import { fetchMovies } from '@/services/tmdb-api';
 import useFetch from '@/services/useFetch';
 import { useRouter } from 'expo-router';
 import {
@@ -65,7 +65,9 @@ export default function Index() {
 								<FlatList
 									className="mb-4 mt-3"
 									data={trendingMovies}
-									renderItem={({ item, index }) => <TrendingCard movie={item} index={index} />}
+									renderItem={({ item, index }) => (
+										<TrendingCard movie={item} index={index} />
+									)}
 									keyExtractor={(item) => item.movie_id.toString()}
 									horizontal={true}
 									showsHorizontalScrollIndicator={false}

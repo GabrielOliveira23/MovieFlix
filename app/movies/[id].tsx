@@ -1,5 +1,5 @@
 import { icons } from '@/constants/icons';
-import { fetchMovieDetails } from '@/services/api';
+import { fetchMovieDetails } from '@/services/tmdb-api';
 import useFetch from '@/services/useFetch';
 import { router, useLocalSearchParams } from 'expo-router';
 import React from 'react';
