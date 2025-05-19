@@ -7,6 +7,10 @@
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 import axios from 'axios';
 
+import { env } from './env';
+
+const API_URL = env.EXPO_PUBLIC_API_URL;
+
 export type HelloWorld200 = {
 	message: string;
 };
@@ -106,7 +110,8 @@ export type GetTrendings200Item = {
 	 */
 	movie_id: number;
 	title: string;
-	poster_url: string;
+	poster_path: string | null;
+	vote_average: number;
 };
 
 export type IncrementMovieCountBodyMovie = {
@@ -117,18 +122,20 @@ export type IncrementMovieCountBodyMovie = {
 	 */
 	movie_id: number;
 	title: string;
-	poster_url: string;
+	poster_path: string | null;
+	genres: string[];
+	vote_average: number;
 };
 
 export type IncrementMovieCountBody = {
 	movie: IncrementMovieCountBodyMovie;
 };
 
-export const getMovieFlix = () => {
+export const movieFlixApi = () => {
 	const helloWorld = <TData = AxiosResponse<HelloWorld200>>(
 		options?: AxiosRequestConfig,
 	): Promise<TData> => {
-		return axios.get('http://localhost:4000/hello_world', options);
+		return axios.get(`${API_URL}/hello_world`, options);
 	};
 
 	/**
@@ -138,11 +145,7 @@ export const getMovieFlix = () => {
 		createUserBody: CreateUserBody,
 		options?: AxiosRequestConfig,
 	): Promise<TData> => {
-		return axios.post(
-			'http://localhost:4000/api/v1/users/',
-			createUserBody,
-			options,
-		);
+		return axios.post(`${API_URL}/api/v1/users/`, createUserBody, options);
 	};
 
 	/**
@@ -152,7 +155,7 @@ export const getMovieFlix = () => {
 		id: string,
 		options?: AxiosRequestConfig,
 	): Promise<TData> => {
-		return axios.get(`http://localhost:4000/api/v1/users/${id}`, options);
+		return axios.get(`${API_URL}/api/v1/users/${id}`, options);
 	};
 
 	/**
@@ -164,7 +167,7 @@ export const getMovieFlix = () => {
 		options?: AxiosRequestConfig,
 	): Promise<TData> => {
 		return axios.patch(
-			`http://localhost:4000/api/v1/users/${id}`,
+			`${API_URL}/api/v1/users/${id}`,
 			updateUserBody,
 			options,
 		);
@@ -177,7 +180,7 @@ export const getMovieFlix = () => {
 		id: string,
 		options?: AxiosRequestConfig,
 	): Promise<TData> => {
-		return axios.delete(`http://localhost:4000/api/v1/users/${id}`, options);
+		return axios.delete(`${API_URL}/api/v1/users/${id}`, options);
 	};
 
 	/**
@@ -186,7 +189,7 @@ export const getMovieFlix = () => {
 	const getTrendings = <TData = AxiosResponse<GetTrendings200Item[]>>(
 		options?: AxiosRequestConfig,
 	): Promise<TData> => {
-		return axios.get('http://localhost:4000/api/v1/metrics/', options);
+		return axios.get(`${API_URL}/api/v1/metrics/`, options);
 	};
 
 	/**
@@ -197,7 +200,7 @@ export const getMovieFlix = () => {
 		options?: AxiosRequestConfig,
 	): Promise<TData> => {
 		return axios.patch(
-			'http://localhost:4000/api/v1/metrics/',
+			`${API_URL}/api/v1/metrics/`,
 			incrementMovieCountBody,
 			options,
 		);

@@ -1,7 +1,15 @@
 import { icons } from '@/constants/icons';
+import { movieFlixApi } from '@/services/api';
+import { AxiosError } from 'axios';
 import { Link } from 'expo-router';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
+
+const { incrementMovieCount } = movieFlixApi();
+
+type Props = Movie & {
+	searchQuery?: string;
+};
 
 const MovieCard = ({
 	id,
@@ -9,9 +17,13 @@ const MovieCard = ({
 	title,
 	vote_average,
 	release_date,
-}: Movie) => {
+	searchQuery,
+}: Props) => {
 	return (
-		<Link href={`/movies/${id}`} asChild>
+		<Link
+			href={{ pathname: '/movies/[id]', params: { id, searchTerm: searchQuery } }}
+			asChild
+		>
 			<TouchableOpacity className="w-[30%]">
 				<Image
 					source={{

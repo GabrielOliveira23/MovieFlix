@@ -3,10 +3,12 @@ import SearchBar from '@/components/SearchBar';
 import TrendingCard from '@/components/TrendingCard';
 import { icons } from '@/constants/icons';
 import { images } from '@/constants/images';
-import { getTrendingMovies } from '@/services/appwrite';
+import { movieFlixApi } from '@/services/api';
 import { fetchMovies } from '@/services/tmdb-api';
+import useAxios from '@/services/useAxios';
 import useFetch from '@/services/useFetch';
-import { useRouter } from 'expo-router';
+import { useFocusEffect, useRouter } from 'expo-router';
+import { useCallback } from 'react';
 import {
 	ActivityIndicator,
 	FlatList,
@@ -16,6 +18,8 @@ import {
 	View,
 } from 'react-native';
 
+const { getTrendings } = movieFlixApi();
+
 export default function Index() {
 	const router = useRouter();
 
@@ -23,7 +27,14 @@ export default function Index() {
 		data: trendingMovies,
 		loading: trendingLoading,
 		error: trendingError,
-	} = useFetch(getTrendingMovies);
+		refetch: refetchTrendingMovies,
+	} = useAxios(getTrendings, false);
+
+	useFocusEffect(
+		useCallback(() => {
+			refetchTrendingMovies();
+		}, []),
+	);
 
 	const {
 		data: movies,
@@ -56,14 +67,14 @@ export default function Index() {
 							placeholder="Search for a movie"
 						/>
 
-						{trendingMovies && (
-							<View className="mt-10">
+						{trendingMovies && trendingMovies.length > 0 && (
+							<View className="-mr-5 mt-10">
 								<Text className="text-lg text-white font-bold mb-3">
 									Trending Movies
 								</Text>
 
 								<FlatList
-									className="mb-4 mt-3"
+									className="mb-4 mt-3 -ml-5 pl-5"
 									data={trendingMovies}
 									renderItem={({ item, index }) => (
 										<TrendingCard movie={item} index={index} />
@@ -71,7 +82,7 @@ export default function Index() {
 									keyExtractor={(item) => item.movie_id.toString()}
 									horizontal={true}
 									showsHorizontalScrollIndicator={false}
-									ItemSeparatorComponent={() => <View className="w-4" />}
+									ItemSeparatorComponent={() => <View className="w-6" />}
 								/>
 							</View>
 						)}

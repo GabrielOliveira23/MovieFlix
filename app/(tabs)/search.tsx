@@ -2,11 +2,13 @@ import MovieCard from '@/components/MovieCard';
 import SearchBar from '@/components/SearchBar';
 import { icons } from '@/constants/icons';
 import { images } from '@/constants/images';
-import { updateSearchCount } from '@/services/appwrite';
 import { fetchMovies } from '@/services/tmdb-api';
-import useFetch from '@/services/useFetch';
+import useAxios from '@/services/useFetch';
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Image, Text, View } from 'react-native';
+import { movieFlixApi } from '../../services/api';
+
+const { incrementMovieCount } = movieFlixApi();
 
 const Search = () => {
 	const [searchQuery, setSearchQuery] = useState('');
@@ -17,7 +19,7 @@ const Search = () => {
 		error,
 		refetch: loadMovies,
 		reset,
-	} = useFetch(() => fetchMovies({ query: searchQuery }), false);
+	} = useAxios(() => fetchMovies({ query: searchQuery }), false);
 
 	useEffect(() => {
 		const timeoutId = setTimeout(async () => {
@@ -31,12 +33,6 @@ const Search = () => {
 		return () => clearTimeout(timeoutId);
 	}, [searchQuery]);
 
-	useEffect(() => {
-		if (movies?.length > 0 && movies?.[0]) {
-			updateSearchCount(searchQuery, movies[0]);
-		}
-	}, [movies]);
-
 	return (
 		<View className="flex-1 bg-primary">
 			<Image
@@ -47,7 +43,9 @@ const Search = () => {
 
 			<FlatList
 				data={movies}
-				renderItem={({ item }) => <MovieCard {...item} />}
+				renderItem={({ item }) => (
+					<MovieCard {...item} searchQuery={searchQuery} />
+				)}
 				keyExtractor={(item) => item.id.toString()}
 				className="px-5"
 				numColumns={3}

@@ -1,8 +1,11 @@
 import { icons } from '@/constants/icons';
+import { movieFlixApi } from '@/services/api';
 import { fetchMovieDetails } from '@/services/tmdb-api';
-import useFetch from '@/services/useFetch';
+import useAxios from '@/services/useFetch';
+import { AxiosError } from 'axios';
 import { router, useLocalSearchParams } from 'expo-router';
-import React from 'react';
+import { useSearchParams } from 'expo-router/build/hooks';
+import React, { useEffect } from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 interface MovieInfoProps {
@@ -19,12 +22,39 @@ const MovieInfo = ({ label, value }: MovieInfoProps) => (
 	</View>
 );
 
+const { incrementMovieCount } = movieFlixApi();
+
 const MovieDetails = () => {
 	const { id } = useLocalSearchParams();
+	const param = useSearchParams();
 
-	const { data: movie, loading } = useFetch(() =>
+	const { data: movie, loading } = useAxios(() =>
 		fetchMovieDetails(id as string),
 	);
+
+	useEffect(() => {
+		const searchTerm = param.get('searchTerm');
+
+		async function incrementTrending() {
+			try {
+				if (!movie || !searchTerm) return;
+				
+				await incrementMovieCount({
+					movie: {
+						...movie,
+						searchTerm,
+						movie_id: movie.id,
+						genres: movie.genres.map((genre) => genre.name),
+					},
+				});
+			} catch (error) {
+				if (error instanceof AxiosError)
+					console.log(error.response?.data.message);
+				else console.log(error);
+			}
+		}
+		incrementTrending();
+	}, [movie]);
 
 	return (
 		<View className="bg-primary flex-1">
