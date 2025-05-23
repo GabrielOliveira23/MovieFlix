@@ -105,7 +105,7 @@ movieflix/
 - [x] Movie search
 - [x] Detailed movie info
 - [ ] User favorites (coming soon!)
-- [ ] Authentication with Appwrite (coming soon!)
+- [ ] Authentication (coming soon!)
 
 ---
 
